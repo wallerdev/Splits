@@ -8,13 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		2C0CD113162CD41D001010E1 /* split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CD111162CD41D001010E1 /* split.cpp */; };
-		2C0CD114162CD41D001010E1 /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0CD112162CD41D001010E1 /* split.h */; };
+		2C0CD114162CD41D001010E1 /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0CD112162CD41D001010E1 /* split.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C64979F162CEB1400A0198E /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C64979D162CEB1400A0198E /* timer.cpp */; };
+		2C6497A0162CEB1400A0198E /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C64979E162CEB1400A0198E /* timer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C0CD070162CD036001010E1 /* libSplitsCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSplitsCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C0CD111162CD41D001010E1 /* split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = split.cpp; sourceTree = "<group>"; };
 		2C0CD112162CD41D001010E1 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		2C64979D162CEB1400A0198E /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
+		2C64979E162CEB1400A0198E /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,8 @@
 		2C0CD065162CD036001010E1 = {
 			isa = PBXGroup;
 			children = (
+				2C64979D162CEB1400A0198E /* timer.cpp */,
+				2C64979E162CEB1400A0198E /* timer.h */,
 				2C0CD111162CD41D001010E1 /* split.cpp */,
 				2C0CD112162CD41D001010E1 /* split.h */,
 				2C0CD071162CD036001010E1 /* Products */,
@@ -53,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C0CD114162CD41D001010E1 /* split.h in Headers */,
+				2C6497A0162CEB1400A0198E /* timer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C0CD113162CD41D001010E1 /* split.cpp in Sources */,
+				2C64979F162CEB1400A0198E /* timer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +178,8 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/SplitsCore;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -178,6 +188,8 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/SplitsCore;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};

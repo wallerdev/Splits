@@ -11,13 +11,14 @@
 		2C0CD0E8162CD3D9001010E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C0CD0E6162CD3D9001010E1 /* InfoPlist.strings */; };
 		2C0CD0EA162CD3D9001010E1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CD0E9162CD3D9001010E1 /* main.m */; };
 		2C0CD0EE162CD3D9001010E1 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2C0CD0EC162CD3D9001010E1 /* Credits.rtf */; };
-		2C0CD0F1162CD3D9001010E1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CD0F0162CD3D9001010E1 /* AppDelegate.m */; };
+		2C0CD0F1162CD3D9001010E1 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CD0F0162CD3D9001010E1 /* AppDelegate.mm */; };
 		2C0CD0F4162CD3D9001010E1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0CD0F2162CD3D9001010E1 /* MainMenu.xib */; };
 		2C0CD0FC162CD3D9001010E1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C0CD0FB162CD3D9001010E1 /* SenTestingKit.framework */; };
 		2C0CD0FD162CD3D9001010E1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C0CD0DD162CD3D9001010E1 /* Cocoa.framework */; };
 		2C0CD105162CD3D9001010E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C0CD103162CD3D9001010E1 /* InfoPlist.strings */; };
 		2C0CD108162CD3D9001010E1 /* SplitsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CD107162CD3D9001010E1 /* SplitsTests.m */; };
-		2CEB4F02162CD70F00EB75C4 /* libSplitsCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEB4F01162CD70F00EB75C4 /* libSplitsCore.a */; };
+		2C649794162CE37E00A0198E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C649793162CE37E00A0198E /* WebKit.framework */; };
+		2C6497AB162CF5B300A0198E /* libSplitsCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6497AA162CF5B300A0198E /* libSplitsCore.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +43,7 @@
 		2C0CD0EB162CD3D9001010E1 /* Splits-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Splits-Prefix.pch"; sourceTree = "<group>"; };
 		2C0CD0ED162CD3D9001010E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2C0CD0EF162CD3D9001010E1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2C0CD0F0162CD3D9001010E1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2C0CD0F0162CD3D9001010E1 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		2C0CD0F3162CD3D9001010E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2C0CD0FA162CD3D9001010E1 /* SplitsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C0CD0FB162CD3D9001010E1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -50,7 +51,8 @@
 		2C0CD104162CD3D9001010E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2C0CD106162CD3D9001010E1 /* SplitsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitsTests.h; sourceTree = "<group>"; };
 		2C0CD107162CD3D9001010E1 /* SplitsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitsTests.m; sourceTree = "<group>"; };
-		2CEB4F01162CD70F00EB75C4 /* libSplitsCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSplitsCore.a; path = "../../../Library/Developer/Xcode/DerivedData/Splits-glaqgmgswckwxydbllhghfplwxxy/Build/Products/Debug/libSplitsCore.a"; sourceTree = "<group>"; };
+		2C649793162CE37E00A0198E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		2C6497AA162CF5B300A0198E /* libSplitsCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSplitsCore.a; path = "../../../../Library/Developer/Xcode/DerivedData/Splits-hjepgkssfgwfdqfmkdvuxhrahsvs/Build/Products/Debug/libSplitsCore.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CEB4F02162CD70F00EB75C4 /* libSplitsCore.a in Frameworks */,
+				2C6497AB162CF5B300A0198E /* libSplitsCore.a in Frameworks */,
+				2C649794162CE37E00A0198E /* WebKit.framework in Frameworks */,
 				2C0CD0DE162CD3D9001010E1 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,7 +81,8 @@
 		2C0CD0CE162CD3D9001010E1 = {
 			isa = PBXGroup;
 			children = (
-				2CEB4F01162CD70F00EB75C4 /* libSplitsCore.a */,
+				2C6497AA162CF5B300A0198E /* libSplitsCore.a */,
+				2C649793162CE37E00A0198E /* WebKit.framework */,
 				2C0CD0E3162CD3D9001010E1 /* Splits */,
 				2C0CD100162CD3D9001010E1 /* SplitsTests */,
 				2C0CD0DC162CD3D9001010E1 /* Frameworks */,
@@ -119,7 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				2C0CD0EF162CD3D9001010E1 /* AppDelegate.h */,
-				2C0CD0F0162CD3D9001010E1 /* AppDelegate.m */,
+				2C0CD0F0162CD3D9001010E1 /* AppDelegate.mm */,
 				2C0CD0F2162CD3D9001010E1 /* MainMenu.xib */,
 				2C0CD0E4162CD3D9001010E1 /* Supporting Files */,
 			);
@@ -266,7 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C0CD0EA162CD3D9001010E1 /* main.m in Sources */,
-				2C0CD0F1162CD3D9001010E1 /* AppDelegate.m in Sources */,
+				2C0CD0F1162CD3D9001010E1 /* AppDelegate.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,15 +382,19 @@
 		2C0CD10C162CD3D9001010E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Splits/Splits-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Splits/Splits-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Splits-glaqgmgswckwxydbllhghfplwxxy/Build/Products/Debug\"",
+					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Splits-hjepgkssfgwfdqfmkdvuxhrahsvs/Build/Products/Debug\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_TEMP_DIR)/../UninstalledProducts/include\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -394,15 +402,19 @@
 		2C0CD10D162CD3D9001010E1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Splits/Splits-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Splits/Splits-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Splits-glaqgmgswckwxydbllhghfplwxxy/Build/Products/Debug\"",
+					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Splits-hjepgkssfgwfdqfmkdvuxhrahsvs/Build/Products/Debug\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_TEMP_DIR)/../UninstalledProducts/include\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
