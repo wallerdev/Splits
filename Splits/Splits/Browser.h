@@ -18,8 +18,11 @@ public:
     Browser(WebView *web_view);
     void LoadHTML(std::string html);
     void RunJavascript(std::string javascript);
+    bool IsLoadCompleted();
+    void set_load_completed(bool value);
 private:
     WebView *_web_view;
+    bool _load_completed;
 };
 
 #endif /* defined(__Splits__Browser__) */

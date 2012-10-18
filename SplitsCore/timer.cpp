@@ -33,7 +33,7 @@ std::chrono::high_resolution_clock::duration Timer::GetTimeElapsed() {
 std::string Timer::GetTimeElapsedDisplay() {
     std::chrono::high_resolution_clock::duration duration = GetTimeElapsed();
     std::chrono::milliseconds mils = std::chrono::duration_cast<std::chrono::milliseconds>(duration);
-    auto miliseconds = mils.count();
+    unsigned long miliseconds = mils.count();
     
     int hours = miliseconds / (1000*60*60);
     int mins = (miliseconds % (1000*60*60)) / (1000*60);

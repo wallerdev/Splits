@@ -25,8 +25,6 @@
     std::shared_ptr<WebBrowserInterface> browser_interface(new Browser(web_view));
     _core_application = new CoreApplication(browser_interface, "");
     
-    _core_application->StartTimer();
-    
     
     
     NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: 0.033
@@ -38,5 +36,12 @@
 -(void)onTick:(NSTimer *)timer {
     _core_application->Update();
 }
+
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
+{
+    _core_application->LoadWSplitSplits("/Users/Eddie/Desktop/New Super Mario Bros Wii PB");
+    _core_application->StartTimer();
+}
+
 
 @end

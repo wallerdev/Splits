@@ -7,24 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C0CD113162CD41D001010E1 /* split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CD111162CD41D001010E1 /* split.cpp */; };
-		2C0CD114162CD41D001010E1 /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0CD112162CD41D001010E1 /* split.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0CD113162CD41D001010E1 /* Split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CD111162CD41D001010E1 /* Split.cpp */; };
+		2C0CD114162CD41D001010E1 /* Split.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0CD112162CD41D001010E1 /* Split.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2C43565E162FA7A40036B4AE /* CoreApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C43565C162FA7A40036B4AE /* CoreApplication.cpp */; };
 		2C43565F162FA7A40036B4AE /* CoreApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C43565D162FA7A40036B4AE /* CoreApplication.h */; };
 		2C435664162FA83E0036B4AE /* WebBrowserInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C435662162FA83E0036B4AE /* WebBrowserInterface.h */; };
-		2C64979F162CEB1400A0198E /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C64979D162CEB1400A0198E /* timer.cpp */; };
-		2C6497A0162CEB1400A0198E /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C64979E162CEB1400A0198E /* timer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C49F81F162FD3E000AAE7B4 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C49F81E162FD3E000AAE7B4 /* Timer.cpp */; };
+		2C6497A0162CEB1400A0198E /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C64979E162CEB1400A0198E /* Timer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C0CD070162CD036001010E1 /* libSplitsCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSplitsCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C0CD111162CD41D001010E1 /* split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = split.cpp; sourceTree = "<group>"; };
-		2C0CD112162CD41D001010E1 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		2C0CD111162CD41D001010E1 /* Split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Split.cpp; sourceTree = "<group>"; };
+		2C0CD112162CD41D001010E1 /* Split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Split.h; sourceTree = "<group>"; };
 		2C43565C162FA7A40036B4AE /* CoreApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreApplication.cpp; sourceTree = "<group>"; };
 		2C43565D162FA7A40036B4AE /* CoreApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreApplication.h; sourceTree = "<group>"; };
 		2C435662162FA83E0036B4AE /* WebBrowserInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebBrowserInterface.h; sourceTree = "<group>"; };
-		2C64979D162CEB1400A0198E /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
-		2C64979E162CEB1400A0198E /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
+		2C49F81E162FD3E000AAE7B4 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		2C64979E162CEB1400A0198E /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,10 +44,10 @@
 				2C435662162FA83E0036B4AE /* WebBrowserInterface.h */,
 				2C43565C162FA7A40036B4AE /* CoreApplication.cpp */,
 				2C43565D162FA7A40036B4AE /* CoreApplication.h */,
-				2C64979D162CEB1400A0198E /* timer.cpp */,
-				2C64979E162CEB1400A0198E /* timer.h */,
-				2C0CD111162CD41D001010E1 /* split.cpp */,
-				2C0CD112162CD41D001010E1 /* split.h */,
+				2C49F81E162FD3E000AAE7B4 /* Timer.cpp */,
+				2C64979E162CEB1400A0198E /* Timer.h */,
+				2C0CD111162CD41D001010E1 /* Split.cpp */,
+				2C0CD112162CD41D001010E1 /* Split.h */,
 				2C0CD071162CD036001010E1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,8 +67,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C0CD114162CD41D001010E1 /* split.h in Headers */,
-				2C6497A0162CEB1400A0198E /* timer.h in Headers */,
+				2C0CD114162CD41D001010E1 /* Split.h in Headers */,
+				2C6497A0162CEB1400A0198E /* Timer.h in Headers */,
 				2C43565F162FA7A40036B4AE /* CoreApplication.h in Headers */,
 				2C435664162FA83E0036B4AE /* WebBrowserInterface.h in Headers */,
 			);
@@ -125,9 +125,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C0CD113162CD41D001010E1 /* split.cpp in Sources */,
-				2C64979F162CEB1400A0198E /* timer.cpp in Sources */,
+				2C0CD113162CD41D001010E1 /* Split.cpp in Sources */,
 				2C43565E162FA7A40036B4AE /* CoreApplication.cpp in Sources */,
+				2C49F81F162FD3E000AAE7B4 /* Timer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

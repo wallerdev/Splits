@@ -15,6 +15,13 @@ class Split {
 public:
     Split();
     ~Split();
+    std::string name();
+    void set_name(std::string name);
+    unsigned long time();
+    void set_time(unsigned long time);
+private:
+    std::string _name;
+    unsigned long _time;
 };
 
 #endif /* defined(__SplitsCore__split__) */
