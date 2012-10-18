@@ -14,7 +14,6 @@
 class Split {
 public:
     Split();
-protected:
     ~Split();
 };
 

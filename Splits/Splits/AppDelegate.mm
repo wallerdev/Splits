@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <WebKit/WebKit.h>
+#include <SplitsCore/WebBrowserInterface.h>
+#include "Browser.h"
 
 @implementation AppDelegate
 
@@ -20,14 +22,12 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    _timer = new Timer();
-    _timer->Start();
+    std::shared_ptr<WebBrowserInterface> browser_interface(new Browser(web_view));
+    _core_application = new CoreApplication(browser_interface, "");
     
-    [[web_view mainFrame] loadHTMLString:[NSString stringWithFormat:@"<html>\
-     <body bgcolor=\"black\">\
-        <h1 id=\"timer\" style=\"color: lightgreen; font-family: Helvetica Neue; \"></h1>\
-     </body>\
-     </html>"] baseURL:nil];
+    _core_application->StartTimer();
+    
+    
     
     NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: 0.033
                                                   target: self
@@ -36,10 +36,7 @@
 }
 
 -(void)onTick:(NSTimer *)timer {
-    std::string elapsed_time = _timer->GetTimeElapsedDisplay();
-    NSString *errorMessage = [NSString stringWithCString:elapsed_time.c_str()
-                                                encoding:[NSString defaultCStringEncoding]];
-    [[web_view windowScriptObject] evaluateWebScript:[NSString stringWithFormat:@"document.getElementById('timer').innerText = '%@';", errorMessage]];
+    _core_application->Update();
 }
 
 @end

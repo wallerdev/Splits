@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
-#include <SplitsCore/timer.h>
+#include <SplitsCore/CoreApplication.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
@@ -17,4 +17,4 @@
 
 @end
 
-Timer *_timer;
+CoreApplication *_core_application;

@@ -14,12 +14,11 @@
 class Timer {
 public:
     Timer();
+    ~Timer();
     void Start();
     void Stop();
     std::chrono::high_resolution_clock::duration GetTimeElapsed();
     std::string GetTimeElapsedDisplay();
-protected:
-    ~Timer();
 private:
     std::chrono::time_point<std::chrono::high_resolution_clock> _start_time;
 };

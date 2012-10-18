@@ -17,6 +17,7 @@
 		2C0CD0FD162CD3D9001010E1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C0CD0DD162CD3D9001010E1 /* Cocoa.framework */; };
 		2C0CD105162CD3D9001010E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C0CD103162CD3D9001010E1 /* InfoPlist.strings */; };
 		2C0CD108162CD3D9001010E1 /* SplitsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CD107162CD3D9001010E1 /* SplitsTests.m */; };
+		2C435667162FAE380036B4AE /* Browser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2C435665162FAE380036B4AE /* Browser.mm */; };
 		2C649794162CE37E00A0198E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C649793162CE37E00A0198E /* WebKit.framework */; };
 		2C6497AB162CF5B300A0198E /* libSplitsCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6497AA162CF5B300A0198E /* libSplitsCore.a */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,8 @@
 		2C0CD104162CD3D9001010E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2C0CD106162CD3D9001010E1 /* SplitsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitsTests.h; sourceTree = "<group>"; };
 		2C0CD107162CD3D9001010E1 /* SplitsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitsTests.m; sourceTree = "<group>"; };
+		2C435665162FAE380036B4AE /* Browser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Browser.mm; sourceTree = "<group>"; };
+		2C435666162FAE380036B4AE /* Browser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Browser.h; sourceTree = "<group>"; };
 		2C649793162CE37E00A0198E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2C6497AA162CF5B300A0198E /* libSplitsCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSplitsCore.a; path = "../../../../Library/Developer/Xcode/DerivedData/Splits-hjepgkssfgwfdqfmkdvuxhrahsvs/Build/Products/Debug/libSplitsCore.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,6 +129,8 @@
 				2C0CD0F0162CD3D9001010E1 /* AppDelegate.mm */,
 				2C0CD0F2162CD3D9001010E1 /* MainMenu.xib */,
 				2C0CD0E4162CD3D9001010E1 /* Supporting Files */,
+				2C435665162FAE380036B4AE /* Browser.mm */,
+				2C435666162FAE380036B4AE /* Browser.h */,
 			);
 			path = Splits;
 			sourceTree = "<group>";
@@ -271,6 +276,7 @@
 			files = (
 				2C0CD0EA162CD3D9001010E1 /* main.m in Sources */,
 				2C0CD0F1162CD3D9001010E1 /* AppDelegate.mm in Sources */,
+				2C435667162FAE380036B4AE /* Browser.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,7 +400,7 @@
 					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Splits-hjepgkssfgwfdqfmkdvuxhrahsvs/Build/Products/Debug\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_TEMP_DIR)/../UninstalledProducts/include\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/..";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -414,7 +420,7 @@
 					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Splits-hjepgkssfgwfdqfmkdvuxhrahsvs/Build/Products/Debug\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_TEMP_DIR)/../UninstalledProducts/include\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/..";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
