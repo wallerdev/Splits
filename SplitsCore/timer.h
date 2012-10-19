@@ -18,9 +18,10 @@ public:
     void Start();
     void Stop();
     std::chrono::high_resolution_clock::duration GetTimeElapsed();
-    std::string GetTimeElapsedDisplay();
+    unsigned long GetTimeElapsedMilliseconds();
 private:
     std::chrono::time_point<std::chrono::high_resolution_clock> _start_time;
+    bool _started;
 };
 
 #endif /* defined(__SplitsCore__timer__) */

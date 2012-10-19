@@ -19,9 +19,12 @@ public:
     void set_name(std::string name);
     unsigned long time();
     void set_time(unsigned long time);
+    unsigned long new_time();
+    void set_new_time(unsigned long time);
 private:
     std::string _name;
     unsigned long _time;
+    unsigned long _new_time;
 };
 
 #endif /* defined(__SplitsCore__split__) */

@@ -26,12 +26,16 @@ public:
     void StartTimer();
     void StopTimer();
     void ResetTimer();
+    void SplitTimer();
     void ChangeSetting(std::string key, std::string value);
     void Update();
+    std::string DisplayMilliseconds(unsigned long milliseconds, bool includeMilliseconds);
 private:
-    void RefreshSplits();
+    void ReloadSplits();
+    void UpdateSplits();
     std::shared_ptr<WebBrowserInterface> _browser;
     std::vector<std::shared_ptr<Split> > _splits;
+    int _currentSplitIndex;
     std::string _settings_file;
     Timer _timer;
 };

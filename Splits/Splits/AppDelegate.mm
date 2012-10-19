@@ -15,19 +15,17 @@
 
 @synthesize web_view;
 
-- (void)dealloc
-{
+- (void)dealloc {
     [super dealloc];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     std::shared_ptr<WebBrowserInterface> browser_interface(new Browser(web_view));
     _core_application = new CoreApplication(browser_interface, "");
     
     
     
-    NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: 0.033
+    [NSTimer scheduledTimerWithTimeInterval: 0.033
                                                   target: self
                                                 selector:@selector(onTick:)
                                                 userInfo: nil repeats:YES];
@@ -37,11 +35,15 @@
     _core_application->Update();
 }
 
-- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
-{
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
     _core_application->LoadWSplitSplits("/Users/Eddie/Desktop/New Super Mario Bros Wii PB");
+}
+
+- (IBAction)timerStart:(id)sender {
     _core_application->StartTimer();
 }
 
-
+- (IBAction)timerSplit:(id)sender {
+    _core_application->SplitTimer();
+}
 @end

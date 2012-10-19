@@ -31,3 +31,11 @@ unsigned long Split::time() {
 void Split::set_time(unsigned long time) {
     _time = time;
 }
+
+unsigned long Split::new_time() {
+    return _new_time;
+}
+
+void Split::set_new_time(unsigned long time) {
+    _new_time = time;
+}

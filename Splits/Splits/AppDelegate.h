@@ -14,6 +14,8 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet WebView *web_view;
+- (IBAction)timerStart:(id)sender;
+- (IBAction)timerSplit:(id)sender;
 
 @end
 
