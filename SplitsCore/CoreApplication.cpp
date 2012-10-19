@@ -35,9 +35,17 @@ CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, s
                        body {\
                            font-family: \"Helvetica Neue\",Helvetica,Arial,sans-serif;\
                            font-size: 10px;\
-                           color: #FFF;\
+                           color: #CCC;\
                            background-color: #000;\
                            margin: 0;\
+                       }\
+                       #timer {\
+                           text-align: right;\
+                           font-size: 24px;\
+                           margin-top: 10px;\
+                           color: #C679FF;\
+                           font-weight: bold;\
+                           margin-right: 5px;\
                        }\
                        #splits {\
                            width: 100%;\
@@ -48,21 +56,29 @@ CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, s
                            border-bottom: 1px solid #000;\
                            border-top: 1px solid #000;\
                        }\
+                       .split_name {\
+                           padding-left: 5px;\
+                       }\
                        .split_time {\
                            text-align: right;\
+                           padding-right: 5px;\
                        }\
                        .split_time.minus {\
-                           color: #00FF00;\
+                           color: #00BFFF;\
+                       }\
+                       .split_time.plus {\
+                           color: #FF4000;\
                        }\
                        #splits .current_split td {\
-                           border-bottom: 1px solid #0A6AC2;\
-                           border-top: 1px solid #0A6AC2;\
+                           border-bottom: 1px solid #1165B5;\
+                           border-top: 1px solid #1165B5;\
+                           color: #FFF;\
                        }\
                        </style>\
                        </head>\
                         <body bgcolor=\"black\">\
                            <table id=\"splits\"></table>\
-                           <h1 id=\"timer\" style=\"color: lightgreen; font-family: Helvetica Neue; \"></h1>\
+                           <div id=\"timer\"></div>\
                         </body>\
                         </html>"
                        );
@@ -141,6 +157,7 @@ void CoreApplication::StartTimer() {
 
 void CoreApplication::StopTimer() {
     _timer.Stop();
+    std::cout << "Stopped" << std::endl;
 }
 
 void CoreApplication::ResetTimer() {
@@ -150,6 +167,9 @@ void CoreApplication::ResetTimer() {
 void CoreApplication::SplitTimer() {
     _splits[_currentSplitIndex]->set_new_time(_timer.GetTimeElapsedMilliseconds());
     _currentSplitIndex++;
+    if(_currentSplitIndex == _splits.size()) {
+        StopTimer();
+    }
     UpdateSplits();
 }
 
@@ -190,6 +210,11 @@ void CoreApplication::Update() {
     std::stringstream javascript_ss;
     javascript_ss << "$('#timer').text('" << DisplayMilliseconds(elapsed, true) << "');";
     
+    if(_splits[_currentSplitIndex]->time() < elapsed) {
+        unsigned long total = _splits[_currentSplitIndex]->time() - elapsed;
+        javascript_ss << "$('.current_split .split_time').text('+" << DisplayMilliseconds(total, false) << "').addClass('plus');";
+    }
+    
     _browser->RunJavascript(javascript_ss.str());
 }
 
@@ -209,8 +234,6 @@ void CoreApplication::ReloadSplits() {
     javascript_ss << html;
     javascript_ss << "';";
     
-    std::cout << javascript_ss.str() << std::endl;
-    
     _browser->RunJavascript(javascript_ss.str());
     
     _currentSplitIndex = 0;
@@ -218,8 +241,6 @@ void CoreApplication::ReloadSplits() {
 }
 
 void CoreApplication::UpdateSplits() {
-    
-    
     // Update current split class.
     std::stringstream javascript_ss;
     javascript_ss << "$('#splits tr').removeClass('current_split').eq(" << _currentSplitIndex << ").addClass('current_split');";
@@ -233,10 +254,9 @@ void CoreApplication::UpdateSplits() {
             javascript_ss << "$('#splits td.split_time:eq(" << i << ")').addClass('minus');";
         } else {
             unsigned long total = new_time - old_time;
-            javascript_ss << "$('#splits td.split_time:eq(" << i << ")').text('" << DisplayMilliseconds(total, false) << "');";
+            javascript_ss << "$('#splits td.split_time:eq(" << i << ")').text('+" << DisplayMilliseconds(total, false) << "');";
             javascript_ss << "$('#splits td.split_time:eq(" << i << ")').addClass('plus');";
         }
-
     }
     _browser->RunJavascript(javascript_ss.str());
 }

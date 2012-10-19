@@ -22,6 +22,8 @@ public:
 private:
     std::chrono::time_point<std::chrono::high_resolution_clock> _start_time;
     bool _started;
+    bool _stopped;
+    std::chrono::high_resolution_clock::duration _stopTime;
 };
 
 #endif /* defined(__SplitsCore__timer__) */
