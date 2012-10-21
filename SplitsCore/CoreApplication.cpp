@@ -27,7 +27,7 @@ std::vector<std::string> SplitString(const std::string &s, char delim) {
     return elems;
 }
 
-CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, std::string settings_file) : _browser(browser), _settings_file(settings_file), _currentSplitIndex(0) {
+CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, std::string settings_file) : _browser(browser), _settings_file(settings_file), _currentSplitIndex(0), _timer(new Timer) {
     _browser->LoadHTML("<html>\
                        <head>\
                        <script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\"></script>\
@@ -82,6 +82,10 @@ CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, s
                         </body>\
                         </html>"
                        );
+}
+
+std::shared_ptr<Timer> CoreApplication::timer() {
+    return _timer;
 }
 
 void CoreApplication::LoadSplits(std::string file) {
@@ -152,25 +156,38 @@ void CoreApplication::SaveWSplitSplits(std::string file) {
 }
 
 void CoreApplication::StartTimer() {
-    _timer.Start();
+    _timer->Start();
 }
 
 void CoreApplication::StopTimer() {
-    _timer.Stop();
-    std::cout << "Stopped" << std::endl;
+    _timer->Stop();
 }
 
 void CoreApplication::ResetTimer() {
-    
+    _timer->Reset();
 }
 
 void CoreApplication::SplitTimer() {
-    _splits[_currentSplitIndex]->set_new_time(_timer.GetTimeElapsedMilliseconds());
-    _currentSplitIndex++;
-    if(_currentSplitIndex == _splits.size()) {
+    if(_splits.size() == 0) {
         StopTimer();
+        UpdateSplits();
     }
-    UpdateSplits();
+    if(_currentSplitIndex < _splits.size()) {
+        _splits[_currentSplitIndex]->set_new_time(_timer->GetTimeElapsedMilliseconds());
+        _currentSplitIndex++;
+        if(_currentSplitIndex == _splits.size()) {
+            StopTimer();
+        }
+        UpdateSplits();
+    }
+}
+
+void CoreApplication::PauseTimer() {
+    
+}
+
+void CoreApplication::ResumeTimer() {
+    
 }
 
 void CoreApplication::ChangeSetting(std::string key, std::string value) {
@@ -206,13 +223,15 @@ std::string CoreApplication::DisplayMilliseconds(unsigned long milliseconds, boo
 }
 
 void CoreApplication::Update() {
-    unsigned long elapsed = _timer.GetTimeElapsedMilliseconds();
+    unsigned long elapsed = _timer->GetTimeElapsedMilliseconds();
     std::stringstream javascript_ss;
     javascript_ss << "$('#timer').text('" << DisplayMilliseconds(elapsed, true) << "');";
     
-    if(_splits[_currentSplitIndex]->time() < elapsed) {
-        unsigned long total = _splits[_currentSplitIndex]->time() - elapsed;
-        javascript_ss << "$('.current_split .split_time').text('+" << DisplayMilliseconds(total, false) << "').addClass('plus');";
+    if(_currentSplitIndex < _splits.size()) {
+        if(_splits[_currentSplitIndex]->time() < elapsed) {
+            unsigned long total = elapsed - _splits[_currentSplitIndex]->time();
+            javascript_ss << "$('.current_split .split_time').text('+" << DisplayMilliseconds(total, false) << "').addClass('plus');";
+        }
     }
     
     _browser->RunJavascript(javascript_ss.str());
@@ -259,4 +278,27 @@ void CoreApplication::UpdateSplits() {
         }
     }
     _browser->RunJavascript(javascript_ss.str());
+}
+bool CoreApplication::CanStart() {
+    return _timer->status() != kRunning && _timer->status() != kFinished;
+}
+
+bool CoreApplication::CanPause() {
+    return _timer->status() == kRunning;
+}
+
+bool CoreApplication::CanSplit() {
+    return _timer->status() == kRunning;
+}
+
+bool CoreApplication::CanReset() {
+    return _timer->status() != kInitial;
+}
+
+bool CoreApplication::CanGoToNextSegment() {
+    return _timer->status() != kFinished && _currentSplitIndex < _splits.size();
+}
+
+bool CoreApplication::CanGoToPreviousSegment() {
+    return _timer->status() != kFinished && _currentSplitIndex > 0;
 }

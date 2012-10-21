@@ -10,7 +10,7 @@
 #include <sstream>
 #include <iomanip>
 
-Timer::Timer() : _started(false), _stopped(false) {
+Timer::Timer() : _status(kInitial) {
     
 }
 
@@ -18,22 +18,36 @@ Timer::~Timer() {
     
 }
 
+TimerStatus Timer::status() {
+    return _status;
+}
+
 void Timer::Start() {
-    _started = true;
-    _stopped = false;
+    _status = kRunning;
     _start_time = std::chrono::high_resolution_clock::now();
 }
 
 void Timer::Stop() {
     _stopTime = GetTimeElapsed();
-    _started = false;
-    _stopped = true;
+    _status = kFinished;
+}
+
+void Timer::Pause() {
+    
+}
+
+void Timer::Resume() {
+    
+}
+
+void Timer::Reset() {
+    _status = kInitial;
 }
 
 std::chrono::high_resolution_clock::duration Timer::GetTimeElapsed() {
-    if(_started) {
+    if(_status == kRunning) {
         return std::chrono::high_resolution_clock::now() - _start_time;
-    } else if(_stopped) {
+    } else if(_status == kFinished) {
         return _stopTime;
     } else {
         return std::chrono::high_resolution_clock::duration(0);

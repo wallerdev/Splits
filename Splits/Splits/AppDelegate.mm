@@ -13,14 +13,15 @@
 
 @implementation AppDelegate
 
-@synthesize web_view;
+@synthesize webView;
+@synthesize startMenuItem;
 
 - (void)dealloc {
     [super dealloc];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    std::shared_ptr<WebBrowserInterface> browser_interface(new Browser(web_view));
+    std::shared_ptr<WebBrowserInterface> browser_interface(new Browser(webView));
     _core_application = new CoreApplication(browser_interface, "");
     
     
@@ -28,7 +29,7 @@
     [NSTimer scheduledTimerWithTimeInterval: 0.033
                                                   target: self
                                                 selector:@selector(onTick:)
-                                                userInfo: nil repeats:YES];
+                                   userInfo: nil repeats:YES];
 }
 
 -(void)onTick:(NSTimer *)timer {
@@ -36,7 +37,7 @@
 }
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
-    _core_application->LoadWSplitSplits("/Users/Eddie/Desktop/New Super Mario Bros Wii PB");
+
 }
 
 - (IBAction)timerStart:(id)sender {
@@ -45,5 +46,48 @@
 
 - (IBAction)timerSplit:(id)sender {
     _core_application->SplitTimer();
+}
+
+- (IBAction)openDocument:(id)sender {
+    NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+    
+    [openDlg setCanChooseFiles:YES];
+    [openDlg setAllowsMultipleSelection:NO];
+    [openDlg setCanChooseDirectories:NO];
+    
+    if([openDlg runModal] == NSOKButton) {
+        NSString *file = [[openDlg URL] path];
+        _core_application->LoadWSplitSplits([file cStringUsingEncoding:NSUTF8StringEncoding]);
+    }
+}
+
+- (IBAction)timerReset:(id)sender {
+    _core_application->ResetTimer();
+}
+
+- (IBAction)timerPause:(id)sender {
+    _core_application->PauseTimer();
+}
+
+- (IBAction)timerPreviousSegment:(id)sender {
+}
+- (IBAction)timerNextSegment:(id)sender {
+}
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
+    if([menuItem action] == @selector(timerStart:)) {
+        return _core_application->CanStart();
+    } else if([menuItem action] == @selector(timerPause:)) {
+        return _core_application->CanPause();
+    } else if([menuItem action] == @selector(timerSplit:)) {
+        return _core_application->CanSplit();
+    } else if([menuItem action] == @selector(timerReset:)) {
+        return _core_application->CanReset();
+    } else if([menuItem action] == @selector(timerPreviousSegment:)) {
+        return _core_application->CanGoToPreviousSegment();
+    } else if([menuItem action] == @selector(timerNextSegment:)) {
+        return _core_application->CanGoToNextSegment();
+    }
+    return YES;
 }
 @end
