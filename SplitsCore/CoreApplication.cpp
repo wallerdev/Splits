@@ -34,18 +34,23 @@ CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, s
                        <style type=\"text/css\" media=\"screen\">\
                        body {\
                            font-family: \"Helvetica Neue\",Helvetica,Arial,sans-serif;\
-                           font-size: 10px;\
+                           font-size: 1em;\
                            color: #CCC;\
                            background-color: #000;\
                            margin: 0;\
                        }\
                        #timer {\
                            text-align: right;\
-                           font-size: 24px;\
-                           margin-top: 10px;\
+                           font-size: 2em;\
                            color: #C679FF;\
                            font-weight: bold;\
                            margin-right: 5px;\
+                       }\
+                       #splits_container {\
+                           overflow: auto;\
+                       }\
+                       #splits_container::-webkit-scrollbar {\
+                           display: none;\
                        }\
                        #splits {\
                            width: 100%;\
@@ -77,7 +82,9 @@ CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, s
                        </style>\
                        </head>\
                         <body bgcolor=\"black\">\
+                           <div id=\"splits_container\">\
                            <table id=\"splits\"></table>\
+                           </div>\
                            <div id=\"timer\"></div>\
                         </body>\
                         </html>"
@@ -165,6 +172,8 @@ void CoreApplication::StopTimer() {
 
 void CoreApplication::ResetTimer() {
     _timer->Reset();
+    _currentSplitIndex = 0;
+    UpdateSplits();
 }
 
 void CoreApplication::SplitTimer() {
@@ -188,6 +197,26 @@ void CoreApplication::PauseTimer() {
 
 void CoreApplication::ResumeTimer() {
     
+}
+
+void CoreApplication::GoToNextSegment() {
+    if(CanGoToNextSegment()) {
+        _splits[_currentSplitIndex]->set_skipped(true);
+        _currentSplitIndex++;
+        UpdateSplits();
+    }
+}
+
+void CoreApplication::GoToPreviousSegment() {
+    if(CanGoToPreviousSegment()) {
+        _currentSplitIndex--;
+        _splits[_currentSplitIndex]->set_skipped(false);
+        UpdateSplits();
+        if(_timer->status() == kFinished) {
+            // Start the timer again if they go to the previous segment after finishing.
+            _timer->Resume();
+        }
+    }
 }
 
 void CoreApplication::ChangeSetting(std::string key, std::string value) {
@@ -266,7 +295,9 @@ void CoreApplication::UpdateSplits() {
     for(int i = 0; i < _currentSplitIndex; i++) {
         unsigned long old_time = _splits[i]->time();
         unsigned long new_time = _splits[i]->new_time();
-        if(old_time > new_time) {
+        if(_splits[i]->skipped()) {
+            javascript_ss << "$('#splits td.split_time:eq(" << i << ")').text('-').removeClass('minus').removeClass('plus');";
+        } else if(old_time > new_time) {
             // Negative
             unsigned long total = old_time - new_time;
             javascript_ss << "$('#splits td.split_time:eq(" << i << ")').text('-" << DisplayMilliseconds(total, false) << "');";
@@ -276,6 +307,10 @@ void CoreApplication::UpdateSplits() {
             javascript_ss << "$('#splits td.split_time:eq(" << i << ")').text('+" << DisplayMilliseconds(total, false) << "');";
             javascript_ss << "$('#splits td.split_time:eq(" << i << ")').addClass('plus');";
         }
+    }
+    for(int i = _currentSplitIndex; i < _splits.size(); i++) {
+        std::cout << "Fixing Split: " << i << std::endl;
+        javascript_ss << "$('#splits td.split_time:eq(" << i << ")').text('" << DisplayMilliseconds(_splits[i]->time(), false) << "').removeClass('minus').removeClass('plus');";
     }
     _browser->RunJavascript(javascript_ss.str());
 }
@@ -296,9 +331,9 @@ bool CoreApplication::CanReset() {
 }
 
 bool CoreApplication::CanGoToNextSegment() {
-    return _timer->status() != kFinished && _currentSplitIndex < _splits.size();
+    return _timer->status() != kFinished && _currentSplitIndex + 1 < _splits.size();
 }
 
 bool CoreApplication::CanGoToPreviousSegment() {
-    return _timer->status() != kFinished && _currentSplitIndex > 0;
+    return _currentSplitIndex > 0;
 }

@@ -30,6 +30,8 @@ public:
     void StopTimer();
     void ResetTimer();
     void SplitTimer();
+    void GoToNextSegment();
+    void GoToPreviousSegment();
     void ChangeSetting(std::string key, std::string value);
     void Update();
     bool CanStart();

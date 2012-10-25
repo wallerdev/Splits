@@ -229,6 +229,15 @@
 										<string key="NSName">_NSRecentDocumentsMenu</string>
 									</object>
 								</object>
+								<object class="NSMenuItem" id="960741285">
+									<reference key="NSMenu" ref="720053764"/>
+									<string key="NSTitle">Import WSplit File...</string>
+									<string key="NSKeyEquiv">i</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
 								<object class="NSMenuItem" id="425164168">
 									<reference key="NSMenu" ref="720053764"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -683,12 +692,49 @@
 						<object class="NSMenu" key="NSSubmenu" id="466310130">
 							<string key="NSTitle">View</string>
 							<array class="NSMutableArray" key="NSMenuItems">
-								<object class="NSMenuItem" id="21079737">
+								<object class="NSMenuItem" id="189794307">
 									<reference key="NSMenu" ref="466310130"/>
 									<string key="NSTitle">Title Bar</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<int key="NSState">1</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="906131430">
+									<reference key="NSMenu" ref="466310130"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="863886026">
+									<reference key="NSMenu" ref="466310130"/>
+									<string key="NSTitle">Actual Size</string>
+									<string key="NSKeyEquiv">0</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="712718868">
+									<reference key="NSMenu" ref="466310130"/>
+									<string key="NSTitle">Zoom In</string>
+									<string key="NSKeyEquiv">+</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="81649869">
+									<reference key="NSMenu" ref="466310130"/>
+									<string key="NSTitle">Zoom Out</string>
+									<string key="NSKeyEquiv">-</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
@@ -715,7 +761,7 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="101267100">
+								<object class="NSMenuItem" id="824705578">
 									<reference key="NSMenu" ref="631684026"/>
 									<string key="NSTitle">Pause</string>
 									<string key="NSKeyEquiv">p</string>
@@ -733,7 +779,7 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="1030175992">
+								<object class="NSMenuItem" id="763463328">
 									<reference key="NSMenu" ref="631684026"/>
 									<string key="NSTitle">Reset</string>
 									<string key="NSKeyEquiv">r</string>
@@ -742,7 +788,7 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="858740522">
+								<object class="NSMenuItem" id="131020583">
 									<reference key="NSMenu" ref="631684026"/>
 									<string key="NSTitle">Previous Segment</string>
 									<string key="NSKeyEquiv"></string>
@@ -751,7 +797,7 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="564084667">
+								<object class="NSMenuItem" id="627984456">
 									<reference key="NSMenu" ref="631684026"/>
 									<string key="NSTitle">Next Segment</string>
 									<string key="NSKeyEquiv"></string>
@@ -879,6 +925,7 @@
 							</set>
 							<string key="NSFrameSize">{480, 360}</string>
 							<reference key="NSSuperview" ref="439893737"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="FrameName"/>
@@ -897,6 +944,7 @@
 					</array>
 					<string key="NSFrameSize">{480, 360}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="260899236"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
@@ -1274,6 +1322,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="972006081"/>
+						<reference key="destination" ref="976324537"/>
+					</object>
+					<int key="connectionID">612</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">window</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="972006081"/>
@@ -1308,7 +1364,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">timerReset:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="1030175992"/>
+						<reference key="destination" ref="763463328"/>
 					</object>
 					<int key="connectionID">598</int>
 				</object>
@@ -1316,7 +1372,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">timerPause:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="101267100"/>
+						<reference key="destination" ref="824705578"/>
 					</object>
 					<int key="connectionID">599</int>
 				</object>
@@ -1324,7 +1380,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">timerPreviousSegment:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="858740522"/>
+						<reference key="destination" ref="131020583"/>
 					</object>
 					<int key="connectionID">600</int>
 				</object>
@@ -1332,7 +1388,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">timerNextSegment:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="564084667"/>
+						<reference key="destination" ref="627984456"/>
 					</object>
 					<int key="connectionID">602</int>
 				</object>
@@ -1348,7 +1404,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">pauseMenuItem</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="101267100"/>
+						<reference key="destination" ref="824705578"/>
 					</object>
 					<int key="connectionID">604</int>
 				</object>
@@ -1364,7 +1420,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">resetMenuItem</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="1030175992"/>
+						<reference key="destination" ref="763463328"/>
 					</object>
 					<int key="connectionID">606</int>
 				</object>
@@ -1372,7 +1428,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">previousSegmentMenuItem</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="858740522"/>
+						<reference key="destination" ref="131020583"/>
 					</object>
 					<int key="connectionID">607</int>
 				</object>
@@ -1380,7 +1436,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">nextSegmentMenuItem</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="564084667"/>
+						<reference key="destination" ref="627984456"/>
 					</object>
 					<int key="connectionID">608</int>
 				</object>
@@ -1393,12 +1449,52 @@
 					<int key="connectionID">609</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">importWSplitFile:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="960741285"/>
+					</object>
+					<int key="connectionID">611</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">zoomIn:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="712718868"/>
+					</object>
+					<int key="connectionID">617</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">zoomOut:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="81649869"/>
+					</object>
+					<int key="connectionID">618</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">actualSize:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="863886026"/>
+					</object>
+					<int key="connectionID">619</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">frameLoadDelegate</string>
 						<reference key="source" ref="260899236"/>
 						<reference key="destination" ref="976324537"/>
 					</object>
 					<int key="connectionID">562</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">UIDelegate</string>
+						<reference key="source" ref="260899236"/>
+						<reference key="destination" ref="976324537"/>
+					</object>
+					<int key="connectionID">620</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1484,6 +1580,7 @@
 							<reference ref="776162233"/>
 							<reference ref="425164168"/>
 							<reference ref="579971712"/>
+							<reference ref="960741285"/>
 						</array>
 						<reference key="parent" ref="379814623"/>
 					</object>
@@ -1811,7 +1908,11 @@
 						<int key="objectID">296</int>
 						<reference key="object" ref="466310130"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="21079737"/>
+							<reference ref="189794307"/>
+							<reference ref="906131430"/>
+							<reference ref="863886026"/>
+							<reference ref="712718868"/>
+							<reference ref="81649869"/>
 						</array>
 						<reference key="parent" ref="586577488"/>
 					</object>
@@ -2108,10 +2209,10 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="524148566"/>
 							<reference ref="190558647"/>
-							<reference ref="858740522"/>
-							<reference ref="101267100"/>
-							<reference ref="1030175992"/>
-							<reference ref="564084667"/>
+							<reference ref="131020583"/>
+							<reference ref="824705578"/>
+							<reference ref="763463328"/>
+							<reference ref="627984456"/>
 						</array>
 						<reference key="parent" ref="1032581527"/>
 					</object>
@@ -2127,27 +2228,52 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">593</int>
-						<reference key="object" ref="1030175992"/>
+						<reference key="object" ref="763463328"/>
 						<reference key="parent" ref="631684026"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">594</int>
-						<reference key="object" ref="101267100"/>
+						<reference key="object" ref="824705578"/>
 						<reference key="parent" ref="631684026"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">595</int>
-						<reference key="object" ref="858740522"/>
+						<reference key="object" ref="131020583"/>
 						<reference key="parent" ref="631684026"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">596</int>
-						<reference key="object" ref="564084667"/>
+						<reference key="object" ref="627984456"/>
 						<reference key="parent" ref="631684026"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">597</int>
-						<reference key="object" ref="21079737"/>
+						<reference key="object" ref="189794307"/>
+						<reference key="parent" ref="466310130"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">610</int>
+						<reference key="object" ref="960741285"/>
+						<reference key="parent" ref="720053764"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">613</int>
+						<reference key="object" ref="906131430"/>
+						<reference key="parent" ref="466310130"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">614</int>
+						<reference key="object" ref="863886026"/>
+						<reference key="parent" ref="466310130"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">615</int>
+						<reference key="object" ref="712718868"/>
+						<reference key="parent" ref="466310130"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">616</int>
+						<reference key="object" ref="81649869"/>
 						<reference key="parent" ref="466310130"/>
 					</object>
 				</array>
@@ -2258,6 +2384,11 @@
 				<string key="595.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="596.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="597.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="610.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="613.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="614.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="615.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="616.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="75.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2271,9 +2402,131 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">609</int>
+			<int key="maxID">620</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">AppDelegate</string>
+					<string key="superclassName">NSObject</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="actualSize:">id</string>
+						<string key="importWSplitFile:">id</string>
+						<string key="openDocument:">id</string>
+						<string key="timerNextSegment:">id</string>
+						<string key="timerPause:">id</string>
+						<string key="timerPreviousSegment:">id</string>
+						<string key="timerReset:">id</string>
+						<string key="timerSplit:">id</string>
+						<string key="timerStart:">id</string>
+						<string key="zoomIn:">id</string>
+						<string key="zoomOut:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="actualSize:">
+							<string key="name">actualSize:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="importWSplitFile:">
+							<string key="name">importWSplitFile:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="openDocument:">
+							<string key="name">openDocument:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="timerNextSegment:">
+							<string key="name">timerNextSegment:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="timerPause:">
+							<string key="name">timerPause:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="timerPreviousSegment:">
+							<string key="name">timerPreviousSegment:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="timerReset:">
+							<string key="name">timerReset:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="timerSplit:">
+							<string key="name">timerSplit:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="timerStart:">
+							<string key="name">timerStart:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="zoomIn:">
+							<string key="name">zoomIn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="zoomOut:">
+							<string key="name">zoomOut:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="nextSegmentMenuItem">NSMenuItem</string>
+						<string key="pauseMenuItem">NSMenuItem</string>
+						<string key="previousSegmentMenuItem">NSMenuItem</string>
+						<string key="resetMenuItem">NSMenuItem</string>
+						<string key="splitMenuItem">NSMenuItem</string>
+						<string key="startMenuItem">NSMenuItem</string>
+						<string key="webView">WebView</string>
+						<string key="window">NSWindow</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="nextSegmentMenuItem">
+							<string key="name">nextSegmentMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pauseMenuItem">
+							<string key="name">pauseMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="previousSegmentMenuItem">
+							<string key="name">previousSegmentMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="resetMenuItem">
+							<string key="name">resetMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="splitMenuItem">
+							<string key="name">splitMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="startMenuItem">
+							<string key="name">startMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="webView">
+							<string key="name">webView</string>
+							<string key="candidateClassName">WebView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="window">
+							<string key="name">window</string>
+							<string key="candidateClassName">NSWindow</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AppDelegate.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSLayoutConstraint</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

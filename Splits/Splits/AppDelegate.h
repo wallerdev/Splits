@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 #include <SplitsCore/CoreApplication.h>
+#include <SplitsCore/WebBrowserInterface.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
@@ -23,13 +24,20 @@
 - (IBAction)timerStart:(id)sender;
 - (IBAction)timerSplit:(id)sender;
 - (IBAction)openDocument:(id)sender;
+- (IBAction)importWSplitFile:(id)sender;
 - (IBAction)timerReset:(id)sender;
 - (IBAction)timerPause:(id)sender;
 - (IBAction)timerPreviousSegment:(id)sender;
 - (IBAction)timerNextSegment:(id)sender;
-
+- (IBAction)zoomIn:(id)sender;
+- (IBAction)zoomOut:(id)sender;
+- (IBAction)actualSize:(id)sender;
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem;
+- (void)windowDidResize:(NSNotification *)notification;
+- (void)updateDisplay;
 
 @end
 
 CoreApplication *_core_application;
+std::shared_ptr<WebBrowserInterface> _web_browser;
+int textSize;

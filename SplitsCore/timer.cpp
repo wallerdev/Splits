@@ -37,7 +37,9 @@ void Timer::Pause() {
 }
 
 void Timer::Resume() {
-    
+    if(_status == kFinished) {
+        _status = kRunning;
+    }
 }
 
 void Timer::Reset() {

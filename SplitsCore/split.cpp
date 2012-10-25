@@ -8,12 +8,21 @@
 
 #include "split.h"
 
-Split::Split() {
+Split::Split() : _skipped(false), _time(0), _new_time(0) {
     
 }
 
 Split::~Split() {
     
+}
+
+
+bool Split::skipped() {
+    return _skipped;
+}
+
+void Split::set_skipped(bool value) {
+    _skipped = value;
 }
 
 std::string Split::name() {

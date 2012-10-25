@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import <WebKit/WebKit.h>
-#include <SplitsCore/WebBrowserInterface.h>
 #include "Browser.h"
 
 @implementation AppDelegate
@@ -21,24 +20,19 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    std::shared_ptr<WebBrowserInterface> browser_interface(new Browser(webView));
-    _core_application = new CoreApplication(browser_interface, "");
+    _web_browser = std::shared_ptr<WebBrowserInterface>(new Browser(webView));
+    _core_application = new CoreApplication(_web_browser, "");
+    textSize = 100;
     
-    
-    
-    [NSTimer scheduledTimerWithTimeInterval: 0.033
-                                                  target: self
-                                                selector:@selector(onTick:)
-                                   userInfo: nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval: 0.033 target: self selector:@selector(onTick:) userInfo: nil repeats:YES];
 }
 
 -(void)onTick:(NSTimer *)timer {
     _core_application->Update();
+    [self updateDisplay];
 }
 
-- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
-
-}
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {}
 
 - (IBAction)timerStart:(id)sender {
     _core_application->StartTimer();
@@ -61,6 +55,9 @@
     }
 }
 
+- (IBAction)importWSplitFile:(id)sender {
+}
+
 - (IBAction)timerReset:(id)sender {
     _core_application->ResetTimer();
 }
@@ -70,8 +67,26 @@
 }
 
 - (IBAction)timerPreviousSegment:(id)sender {
+    _core_application->GoToPreviousSegment();
 }
+
 - (IBAction)timerNextSegment:(id)sender {
+    _core_application->GoToNextSegment();
+}
+
+- (IBAction)zoomIn:(id)sender {
+    textSize += 5;
+    NSString *adjustJS = [NSString stringWithFormat:@"$('body, table').css('font-size', '%d%%');", textSize];
+    _web_browser->RunJavascript([adjustJS cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
+- (IBAction)zoomOut:(id)sender {
+    textSize -= 5;
+    NSString *adjustJS = [NSString stringWithFormat:@"$('body, table').css('font-size', '%d%%');", textSize];
+    _web_browser->RunJavascript([adjustJS cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
+- (IBAction)actualSize:(id)sender {
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
@@ -90,4 +105,22 @@
     }
     return YES;
 }
+
+
+- (void)windowDidResize:(NSNotification *)notification {
+    [self updateDisplay];
+}
+
+- (void)updateDisplay {
+    NSSize size = [webView frame].size;
+    NSString *s = [NSString stringWithFormat:@"var textareaWidth = $('#splits')[0].scrollWidth;$('#splits_container').height(%f - $('#timer').height());", size.height];
+    if(_web_browser != NULL) {
+        _web_browser->RunJavascript([s cStringUsingEncoding:NSUTF8StringEncoding]);
+    }
+}
+
+- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
+    NSLog(message);
+}
+
 @end
