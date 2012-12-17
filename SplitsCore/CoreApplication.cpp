@@ -121,14 +121,30 @@ std::shared_ptr<Timer> CoreApplication::timer() {
 }
 
 void CoreApplication::LoadSplits(std::string file) {
+    _splits.clear();
+    
     std::ifstream file_stream(file);
     YAML::Parser parser(file_stream);
     YAML::Node doc;
     parser.GetNextDocument(doc);
+    doc["title"] >> _title;
+    doc["attempts"] >> _attempts;
     
-    for(unsigned i = 0; i < doc.size(); i++) {
+    const YAML::Node& splits = doc["splits"];
+    
+    for(unsigned i = 0; i < splits.size(); i++) {
+        std::shared_ptr<Split> split(new Split);
         std::string name;
+        splits[i]["name"] >> name;
+        split->set_name(name);
+        unsigned long milliseconds;
+        splits[i]["time"] >> milliseconds;
+        split->set_time(milliseconds);
+        _splits.push_back(split);
     }
+    
+    file_stream.close();
+    ReloadSplits();
 }
 
 void CoreApplication::SaveSplits(std::string file) {
@@ -169,6 +185,8 @@ void CoreApplication::SaveSplits(std::string file) {
 }
 
 void CoreApplication::LoadWSplitSplits(std::string file) {
+    _splits.clear();
+    
     std::string line = "";
     std::ifstream file_stream;
     std::string title_equals = "Title=";
