@@ -40,6 +40,7 @@ public:
     bool CanReset();
     bool CanGoToNextSegment();
     bool CanGoToPreviousSegment();
+    void Edit();
     std::string DisplayMilliseconds(unsigned long milliseconds, bool includeMilliseconds);
 private:
     void ReloadSplits();
@@ -49,6 +50,8 @@ private:
     int _currentSplitIndex;
     std::string _settings_file;
     std::shared_ptr<Timer> _timer;
+    std::string _title;
+    int _attempts;
 };
 
 #endif /* defined(__SplitsCore__CoreApplication__) */

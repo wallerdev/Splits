@@ -12,6 +12,7 @@
 #include <vector>
 #include <iomanip>
 #include <SplitsCore/Split.h>
+#include <yaml.h>
 
 bool StartsWith(std::string input, std::string prefix) {
     return !input.compare(0, prefix.size(), prefix);
@@ -27,7 +28,7 @@ std::vector<std::string> SplitString(const std::string &s, char delim) {
     return elems;
 }
 
-CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, std::string settings_file) : _browser(browser), _settings_file(settings_file), _currentSplitIndex(0), _timer(new Timer) {
+CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, std::string settings_file) : _browser(browser), _settings_file(settings_file), _currentSplitIndex(0), _timer(new Timer), _attempts(0), _title("") {
     _browser->LoadHTML("<html>\
                        <head>\
                        <script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\"></script>\
@@ -53,6 +54,7 @@ CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, s
                            display: none;\
                        }\
                        #splits {\
+                           outline: 0px solid transparent;\
                            width: 100%;\
                            border-spacing: 0;\
                        }\
@@ -60,6 +62,19 @@ CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, s
                            margin: 0;\
                            border-bottom: 1px solid #000;\
                            border-top: 1px solid #000;\
+                       }\
+                       .add_split, .remove_split {\
+                           text-align: center;\
+                           min-width: 20px;\
+                           width: 20px;\
+                           font-weight: bold;\
+                           cursor: pointer;\
+                       }\
+                       .remove_split {\
+                           color: red;\
+                       }\
+                       .add_split {\
+                           color: #00FF00;\
                        }\
                        .split_name {\
                            padding-left: 5px;\
@@ -74,16 +89,26 @@ CoreApplication::CoreApplication(std::shared_ptr<WebBrowserInterface> browser, s
                        .split_time.plus {\
                            color: #FF4000;\
                        }\
-                       #splits .current_split td {\
+                       #splits.active .current_split td {\
                            border-bottom: 1px solid #1165B5;\
                            border-top: 1px solid #1165B5;\
                            color: #FFF;\
                        }\
+                       #splits.editing {\
+                           color: #FFF;\
+                       }\
+                       .milliseconds {\
+                           margin-left: 5px;\
+                           font-size: 0.65em;\
+                       }\
+                       .decimal {\
+                           display: none;\
+                       }\
                        </style>\
                        </head>\
-                        <body bgcolor=\"black\">\
+                        <body>\
                            <div id=\"splits_container\">\
-                           <table id=\"splits\"></table>\
+                           <table id=\"splits\" class=\"active\"></table>\
                            </div>\
                            <div id=\"timer\"></div>\
                         </body>\
@@ -96,15 +121,54 @@ std::shared_ptr<Timer> CoreApplication::timer() {
 }
 
 void CoreApplication::LoadSplits(std::string file) {
+    std::ifstream file_stream(file);
+    YAML::Parser parser(file_stream);
+    YAML::Node doc;
+    parser.GetNextDocument(doc);
     
+    for(unsigned i = 0; i < doc.size(); i++) {
+        std::string name;
+    }
 }
 
 void CoreApplication::SaveSplits(std::string file) {
+    std::ofstream file_stream;
+    file_stream.open(file);
     
+    YAML::Emitter out;
+    out << YAML::BeginMap;
+    out << YAML::Key << "title";
+    out << YAML::Value << _title;
+    out << YAML::Key << "attempts";
+    out << YAML::Value << _attempts;
+    out << YAML::Key << "splits";
+    out << YAML::Value;
+    out << YAML::BeginSeq;
+
+    for(int i = 0; i < _splits.size(); i++) {
+        out << YAML::BeginMap;
+        out << YAML::Key << "name";
+        out << YAML::Value << _splits[i]->name();
+        out << YAML::Key << "time";
+        std::shared_ptr<Split> lastSplit = _splits[_splits.size() - 1];
+        
+        out << YAML::Value;
+        if(lastSplit->time() > lastSplit->new_time() && lastSplit->new_time() != 0) {
+            out << _splits[i]->new_time();
+        } else {
+            out << _splits[i]->time();
+        }
+        out << YAML::EndMap;
+    }
+    
+    out << YAML::EndSeq;
+    out << YAML::EndMap;
+    
+    file_stream << out.c_str();
+    file_stream.close();
 }
 
 void CoreApplication::LoadWSplitSplits(std::string file) {
-    
     std::string line = "";
     std::ifstream file_stream;
     std::string title_equals = "Title=";
@@ -125,12 +189,11 @@ void CoreApplication::LoadWSplitSplits(std::string file) {
 
         // Skip empty lines.
         if(line.size() > 0) {
-            std::cout << line << std::endl;
-            
             if(StartsWith(line, title_equals)) {
-                std::string title = line.substr(title_equals.size(), line.size() - title_equals.size());
+                _title = line.substr(title_equals.size(), line.size() - title_equals.size());
             } else if(StartsWith(line, attempts_equals)) {
                 std::string attempts = line.substr(attempts_equals.size(), line.size() - attempts_equals.size());
+                _attempts = atoi(attempts.c_str());
             } else if(StartsWith(line, size_equals)) {
                 std::string size = line.substr(size_equals.size(), line.size() - size_equals.size());
             } else if(StartsWith(line, offset_equals)) {
@@ -140,7 +203,6 @@ void CoreApplication::LoadWSplitSplits(std::string file) {
             } else {
                 // Split
                 std::vector<std::string> split_values = SplitString(line, ',');
-                std::cout << split_values[0] << std::endl;
                 
                 std::shared_ptr<Split> split(new Split);
                 split->set_name(split_values[0]);
@@ -173,6 +235,7 @@ void CoreApplication::StopTimer() {
 void CoreApplication::ResetTimer() {
     _timer->Reset();
     _currentSplitIndex = 0;
+    _attempts++;
     UpdateSplits();
 }
 
@@ -232,20 +295,20 @@ std::string CoreApplication::DisplayMilliseconds(unsigned long milliseconds, boo
     std::stringstream ss;
     ss << std::setfill('0');
     if(hours > 0) {
-        ss << hours << ":";
+        ss << "<span class=\"hours\">" << hours << "</span><span class=\"separator\">:</span>";
     }
     if(hours == 0 && mins > 0) {
-        ss << mins << ":";
+        ss << "<span class=\"minutes\">" << mins << "</span><span class=\"separator\">:</span>";
     } else if(hours > 0) {
-        ss << std::setw(2) << mins << ":";
+        ss << "<span class=\"minutes\">" << std::setw(2) << mins << "</span><span class=\"separator\">:</span>";
     }
     if(hours == 0 && mins == 0) {
-        ss << seconds;
+        ss << "<span class=\"seconds\">" << seconds << "</span>";
     } else {
-        ss << std::setw(2) << seconds;
+        ss << "<span class=\"seconds\">" << std::setw(2) << seconds << "</span>";;
     }
     if(includeMilliseconds) {
-        ss << "." << std::setw(3) << millis_remaining;
+        ss << "<span class=\"decimal\">.</span>" << "<span class=\"milliseconds\">" << std::setw(3) << millis_remaining << "</span>";
     }
 
     return ss.str();
@@ -254,12 +317,12 @@ std::string CoreApplication::DisplayMilliseconds(unsigned long milliseconds, boo
 void CoreApplication::Update() {
     unsigned long elapsed = _timer->GetTimeElapsedMilliseconds();
     std::stringstream javascript_ss;
-    javascript_ss << "$('#timer').text('" << DisplayMilliseconds(elapsed, true) << "');";
+    javascript_ss << "$('#timer').html('" << DisplayMilliseconds(elapsed, true) << "');";
     
     if(_currentSplitIndex < _splits.size()) {
         if(_splits[_currentSplitIndex]->time() < elapsed) {
             unsigned long total = elapsed - _splits[_currentSplitIndex]->time();
-            javascript_ss << "$('.current_split .split_time').text('+" << DisplayMilliseconds(total, false) << "').addClass('plus');";
+            javascript_ss << "$('.current_split .split_time').html('+" << DisplayMilliseconds(total, false) << "').addClass('plus');";
         }
     }
     
@@ -296,21 +359,20 @@ void CoreApplication::UpdateSplits() {
         unsigned long old_time = _splits[i]->time();
         unsigned long new_time = _splits[i]->new_time();
         if(_splits[i]->skipped()) {
-            javascript_ss << "$('#splits td.split_time:eq(" << i << ")').text('-').removeClass('minus').removeClass('plus');";
+            javascript_ss << "$('#splits td.split_time:eq(" << i << ")').removeClass('minus').removeClass('plus').html('-');";
         } else if(old_time > new_time) {
             // Negative
             unsigned long total = old_time - new_time;
-            javascript_ss << "$('#splits td.split_time:eq(" << i << ")').text('-" << DisplayMilliseconds(total, false) << "');";
+            javascript_ss << "$('#splits td.split_time:eq(" << i << ")').html('-" << DisplayMilliseconds(total, false) << "');";
             javascript_ss << "$('#splits td.split_time:eq(" << i << ")').addClass('minus');";
         } else {
             unsigned long total = new_time - old_time;
-            javascript_ss << "$('#splits td.split_time:eq(" << i << ")').text('+" << DisplayMilliseconds(total, false) << "');";
+            javascript_ss << "$('#splits td.split_time:eq(" << i << ")').html('+" << DisplayMilliseconds(total, false) << "');";
             javascript_ss << "$('#splits td.split_time:eq(" << i << ")').addClass('plus');";
         }
     }
     for(int i = _currentSplitIndex; i < _splits.size(); i++) {
-        std::cout << "Fixing Split: " << i << std::endl;
-        javascript_ss << "$('#splits td.split_time:eq(" << i << ")').text('" << DisplayMilliseconds(_splits[i]->time(), false) << "').removeClass('minus').removeClass('plus');";
+        javascript_ss << "$('#splits td.split_time:eq(" << i << ")').removeClass('minus').removeClass('plus').html('" << DisplayMilliseconds(_splits[i]->time(), false) << "');";
     }
     _browser->RunJavascript(javascript_ss.str());
 }
@@ -336,4 +398,8 @@ bool CoreApplication::CanGoToNextSegment() {
 
 bool CoreApplication::CanGoToPreviousSegment() {
     return _currentSplitIndex > 0;
+}
+
+void CoreApplication::Edit() {
+    _browser->RunJavascript("$('#splits').removeClass('active').addClass('editing');$('#splits tr').append('<td class=\"remove_split\">-</td><td class=\"add_split\">+</td>');$('#splits').append('<tr><td></td><td></td><td></td><td class=\"add_split\">+</td>');$('.split_name, .split_time').attr('contentEditable', true);$('.split_name').first().focus();");
 }

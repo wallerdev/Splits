@@ -398,6 +398,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Splits-glaqgmgswckwxydbllhghfplwxxy/Build/Products/Debug\"",
 					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Splits-hjepgkssfgwfdqfmkdvuxhrahsvs/Build/Products/Debug\"",
+					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/..";
@@ -418,6 +419,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/Splits-glaqgmgswckwxydbllhghfplwxxy/Build/Products/Debug\"",
 					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/Splits-hjepgkssfgwfdqfmkdvuxhrahsvs/Build/Products/Debug\"",
+					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/..";

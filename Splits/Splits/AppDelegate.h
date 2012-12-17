@@ -21,6 +21,8 @@
 @property (assign) IBOutlet NSMenuItem *resetMenuItem;
 @property (assign) IBOutlet NSMenuItem *previousSegmentMenuItem;
 @property (assign) IBOutlet NSMenuItem *nextSegmentMenuItem;
+@property (assign) IBOutlet NSMenuItem *alwaysOnTopMenuItem;
+@property (nonatomic, retain) NSString *fileName;
 - (IBAction)timerStart:(id)sender;
 - (IBAction)timerSplit:(id)sender;
 - (IBAction)openDocument:(id)sender;
@@ -32,6 +34,10 @@
 - (IBAction)zoomIn:(id)sender;
 - (IBAction)zoomOut:(id)sender;
 - (IBAction)actualSize:(id)sender;
+- (IBAction)alwaysOnTop:(id)sender;
+- (IBAction)edit:(id)sender;
+- (IBAction)save:(id)sender;
+- (IBAction)saveAs:(id)sender;
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem;
 - (void)windowDidResize:(NSNotification *)notification;
 - (void)updateDisplay;
@@ -40,4 +46,4 @@
 
 CoreApplication *_core_application;
 std::shared_ptr<WebBrowserInterface> _web_browser;
-int textSize;
+int _textSize;
